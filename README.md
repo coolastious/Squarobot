@@ -16,6 +16,8 @@ This project was built and tested on the following system architecture:
 | **Visualization**| RViz2 (14.1.20) / OGRE (1.12.10) |
 | **Python** | 3.12.3 |
 | **Ubuntu Dual Booted** | Ubuntu 24.04 LTS |
+####
+(NOTE:- Host OS can change based on device. It can be MACOS or Any DUAL Booted Windows PC)
 ---
 
 ### Required Packages & Installation
