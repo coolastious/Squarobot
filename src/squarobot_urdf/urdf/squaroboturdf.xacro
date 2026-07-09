@@ -1,0 +1,148 @@
+<?xml version="1.0" ?>
+<robot name="squarobot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find squarobot_urdf)/urdf/materials.xacro" />
+<xacro:include filename="$(find squarobot_urdf)/urdf/squaroboturdf.trans" />
+<xacro:include filename="$(find squarobot_urdf)/urdf/squaroboturdf.gazebo" />
+
+<link name="base_footprint"/>
+
+<joint name="base_footprint_joint" type="fixed">
+  <parent link="base_link"/>
+  <child link="base_footprint"/>
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+</joint>
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.0003749117484439649 0.0 0.11103342002103095" rpy="0 0 0"/>
+    <mass value="3.4105557661008468"/>
+    <inertia ixx="0.013426" iyy="0.01385" izz="0.012658" ixy="-0.0" iyz="0.0" ixz="0.00012"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find squarobot_urdf)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="Neon_Orange">
+      <color rgba="1.0 0.45 0.0 1.0"/>
+    </material>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0.02" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find squarobot_urdf)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_wheel_1">
+  <inertial>
+    <origin xyz="-1.0436096431476471e-14 -0.03680590494479116 0.0" rpy="0 0 0"/>
+    <mass value="0.7705486403220919"/>
+    <inertia ixx="0.000281" iyy="0.000463" izz="0.000281" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.055 0.067 -0.035" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find squarobot_urdf)/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+    <geometry>
+      <cylinder radius="0.035" length="0.02"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_wheel_1">
+  <inertial>
+    <origin xyz="1.0366707492437399e-14 0.036805904944791135 -6.938893903907228e-18" rpy="0 0 0"/>
+    <mass value="0.7705486403220932"/>
+    <inertia ixx="0.000281" iyy="0.000463" izz="0.000281" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.055 -0.067 -0.035" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find squarobot_urdf)/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+    <geometry>
+      <cylinder radius="0.035" length="0.02"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lidar_1">
+  <inertial>
+    <origin xyz="-1.734723475976807e-18 3.3260702551252488e-18 0.008500000000000063" rpy="0 0 0"/>
+    <mass value="0.16769821584862302"/>
+    <inertia ixx="2.1e-05" iyy="2.1e-05" izz="3.4e-05" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.005889 -0.0 -0.19325" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find squarobot_urdf)/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="lidar_blue"/>
+  </visual>
+  <collision>
+    <origin xyz="0.005889 -0.0 -0.19325" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find squarobot_urdf)/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="caster_1">
+  <inertial>
+    <origin xyz="-2.7755575615628914e-17 -1.400812040352104e-18 -0.013084677419354804" rpy="0 0 0"/>
+    <mass value="0.09954512659519218"/>
+    <inertia ixx="1e-05" iyy="1e-05" izz="7e-06" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0625 -0.0 -0.03" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find squarobot_urdf)/meshes/caster_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="grey"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <sphere radius="0.035"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="right_wheel" type="continuous">
+  <origin xyz="-0.055 -0.067 0.035" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="right_wheel_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="left_wheel" type="continuous">
+  <origin xyz="-0.055 0.067 0.035" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="left_wheel_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="lidar" type="fixed">
+  <origin xyz="-0.005889 0.0 0.19325" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="lidar_1"/>
+</joint>
+
+<joint name="caster_joint" type="fixed">
+  <origin xyz="0.0625 0.0 0.03" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="caster_1"/>
+</joint>
+
+</robot>

@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<robot name="squareroboturdf" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+  <!-- Define Material Colors -->
+
+  <!-- MDF board (light brown / khaki) -->
+  <material name="mdf">
+    <color rgba="0.76 0.69 0.57 1.000"/> <!-- MDF-like Khaki -->
+  </material>
+
+  <!-- Black rubber (wheels) -->
+  <material name="black">
+    <color rgba="0.000 0.000 0.000 1.000"/> <!-- Black -->
+  </material>
+
+  <!-- Dark grey plastic -->
+  <material name="dark_grey">
+    <color rgba="0.250 0.250 0.250 1.000"/> <!-- Dark Grey -->
+  </material>
+
+  <!-- Caster (metallic grey) -->
+  <material name="grey">
+    <color rgba="0.500 0.500 0.500 1.000"/> <!-- Grey -->
+  </material>
+
+  <!-- Lidar (blue highlight so it stands out) -->
+  <material name="lidar_blue">
+    <color rgba="0.200 0.200 0.600 1.000"/> <!-- Dark Blue -->
+  </material>
+
+
+</robot>
