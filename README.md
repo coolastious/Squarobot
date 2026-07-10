@@ -72,6 +72,9 @@ cd ~/squarobot_ws
 colcon build --symlink-install
 source install/setup.bash
 ```
+**📝 Note**
+
+This README assumes your workspace is named **`squarobot_ws`**. If you choose a different workspace name, replace `squarobot_ws` with your workspace name in all commands.
 
 ## GOAL
 
@@ -143,7 +146,7 @@ Starts the 3D physics simulation (Gazebo), spawning the custom Squarobot model a
 ```bash
 cd ~/squarobot_ws
 source install/setup.bash
-ros2 launch nav2_bringup bringup_launch.py map:=/home/yz/squarobot_ws/src/squarobot_slam/maps/my_first_map.yaml use_sim_time:=true
+ros2 launch nav2_bringup bringup_launch.py map:=$HOME/squarobot_ws/src/squarobot_slam/maps/my_first_map.yaml use_sim_time:=true
 ```
 
 ###
