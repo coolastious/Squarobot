@@ -72,7 +72,7 @@ cd ~/squarobot_ws
 colcon build --symlink-install
 source install/setup.bash
 ```
-**📝 Note**
+**Note**
 
 This README assumes your workspace is named **`squarobot_ws`**. If you choose a different workspace name, replace `squarobot_ws` with your workspace name in all commands.
 
