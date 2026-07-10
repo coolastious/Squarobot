@@ -18,9 +18,11 @@ This project was built and tested on the following system architecture:
 | **Ubuntu Dual Booted** | Ubuntu 24.04 LTS |
 ####
 (NOTE:- Host OS can change based on device. It can be MACOS or Any DUAL Booted Windows PC)
+
 ---
 
 ### Required Packages & Installation
+
 Before running the project, ensure you have the necessary ROS 2 Jazzy packages installed. Open a terminal and run the following commands:
 
 ```bash
@@ -55,6 +57,7 @@ Before running the project, ensure you have the necessary ROS 2 Jazzy packages i
 ```bash
 sudo apt update
 ```
+
 ### 2. Install all required ROS 2 packages
 ```bash
 sudo apt install ros-jazzy-navigation2* ros-jazzy-nav2* ros-jazzy-slam-toolbox* ros-jazzy-cartographer* ros-jazzy-teleop-twist-keyboard ros-jazzy-ros-gz
@@ -62,34 +65,37 @@ sudo apt install ros-jazzy-navigation2* ros-jazzy-nav2* ros-jazzy-slam-toolbox* 
 
 ### To Install Workspace Itself
 ```bash
-mkdir -p ~/ros2_ws/src
-cd ~/ros2_ws/src
+mkdir -p ~/squarobot_ws/src
+cd ~/squarobot_ws/src
 git clone https://github.com/coolastious/Squarobot-ROS2-Jazzy-.git .
-cd ~/ros2_ws
+cd ~/squarobot_ws
 colcon build --symlink-install
 source install/setup.bash
 ```
 
 ## GOAL
+
 SLAM the squarobot in RViz, then save the map, and do the navigation of the robot in the saved map.
 
 ## Terminal Commands (Mapping)
 
 ### Gazebo Launch (Terminal 1)
 ```bash
-cd ~/ros2_ws
+cd ~/squarobot_ws
 source install/setup.bash
 ros2 launch squarobot_gazebo gazebo.launch.py
 ```
+
 ###
 Starts the 3D physics simulation (Gazebo), spawning the custom Squarobot model and the virtual environment it will explore.
 
 ### Start SLAM (Terminal 2)
 ```bash
-cd ~/ros2_ws
+cd ~/squarobot_ws
 source install/setup.bash
-ros2 launch slam_toolbox online_async_launch.py slam_params_file:=/home/yz/ros2_ws/src/squarobot_slam/config/mapper_params_online_async.yaml use_sim_time:=true
+ros2 launch slam_toolbox online_async_launch.py slam_params_file:=/home/yz/squarobot_ws/src/squarobot_slam/config/mapper_params_online_async.yaml use_sim_time:=true
 ```
+
 ###
 Launches the SLAM Toolbox node, which actively processes the robot's LiDAR and odometry data to build a 2D map of the environment in real-time.
 
@@ -98,6 +104,7 @@ Launches the SLAM Toolbox node, which actively processes the robot's LiDAR and o
 source /opt/ros/jazzy/setup.bash
 ros2 run rviz2 rviz2 --ros-args -p use_sim_time:=true
 ```
+
 ###
 Launches the SLAM Toolbox node, which actively processes the robot's LiDAR and odometry data to build a 2D map of the environment in real-time.
 
@@ -106,15 +113,17 @@ Launches the SLAM Toolbox node, which actively processes the robot's LiDAR and o
 source /opt/ros/jazzy/setup.bash
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
+
 ###
 Activates a keyboard control node so you can manually drive the robot around the simulation using your arrow keys to map the entire area.
 
 ### Map Saving Command (Terminal 5) / Run this command by using CTRL+c in terminal 4 then running Map Saving Command in terminal 4 itself
 ```bash
-cd ~/ros2_ws
+cd ~/squarobot_ws
 source install/setup.bash
-ros2 run nav2_map_server map_saver_cli -t /map -f ~/ros2_ws/src/squarobot_slam/maps/my_first_map --ros-args -p use_sim_time:=true -p map_subscribe_transient_local:=true
+ros2 run nav2_map_server map_saver_cli -t /map -f ~/squarobot_ws/src/squarobot_slam/maps/my_first_map --ros-args -p use_sim_time:=true -p map_subscribe_transient_local:=true
 ```
+
 ###
 Captures the live map data from SLAM Toolbox and permanently saves it as a .yaml and .pgm file pair in your workspace for future autonomous driving.
 
@@ -122,27 +131,30 @@ Captures the live map data from SLAM Toolbox and permanently saves it as a .yaml
 
 ### Start Gazebo (Terminal 1)
 ```bash
-cd ~/ros2_ws
+cd ~/squarobot_ws
 source install/setup.bash
 ros2 launch squarobot_gazebo gazebo.launch.py
 ```
+
 ###
 Starts the 3D physics simulation (Gazebo), spawning the custom Squarobot model and the virtual environment it will explore.
 
 ### Launch Nav2 (Terminal 2)
 ```bash
-cd ~/ros2_ws
+cd ~/squarobot_ws
 source install/setup.bash
-ros2 launch nav2_bringup bringup_launch.py map:=/home/yz/ros2_ws/src/squarobot_slam/maps/my_first_map.yaml use_sim_time:=true
+ros2 launch nav2_bringup bringup_launch.py map:=/home/yz/squarobot_ws/src/squarobot_slam/maps/my_first_map.yaml use_sim_time:=true
 ```
+
 ###
 Starts the full ROS 2 Navigation Stack (Nav2), loads your previously saved map, and activates the path-planning algorithms required for autonomous movement and obstacle avoidance.
 
 ### Launch RViz (Terminal 3)
-```bash 
-cd ~/ros2_ws
+```bash
+cd ~/squarobot_ws
 source install/setup.bash
 ros2 run rviz2 rviz2 -d $(ros2 pkg prefix nav2_bringup)/share/nav2_bringup/rviz/nav2_default_view.rviz --ros-args -p use_sim_time:=true
 ```
+
 ###
 Opens RViz2 pre-configured with the default Navigation layout, providing the necessary buttons (like 2D Pose Estimate and Nav2 Goal) to interact with and command the robot autonomously.
